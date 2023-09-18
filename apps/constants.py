@@ -17,8 +17,7 @@ SYSTEM_PROMPT = [
 ]
 
 
-TITLE_PROMPT = """Viết tiêu đề cho cho một Email Marketing với chủ đề về {topic} theo phong cách viết: {tone_email} và 
-bằng ngôn ngữ: {language}."""
+TITLE_PROMPT = """Viết tiêu đề cho cho một Email Marketing với chủ đề về {topic} theo phong cách viết: {tone_email} và bằng ngôn ngữ: {language}."""
 
 CONTENT_PROMPT = """Viết phần nội dung của Email Marketing với {n} điểm chính (key points) như sau:
 - {key_points}
