@@ -5,12 +5,13 @@
     - 2.1  [Tạo một email-marketing cơ bản](#simple)
     - 2.2  [Viết lại nội dung trong email-marketing](#content_rewriting)
     - 2.3  [Trợ lý ChatMSpot](#assistant)
+    - 2.4 [Mẫu tham khảo (Templates)](#templates)
 ---
 
 ## <a name='introduction'></a> 1. Giới thiệu
 
-**Công cụ AI tạo sinh Email-marketing (β)** là bản thử nghiệm ứng dụng công nghệ AI tạo sinh (Generative-AI) trong 
-Email Marketing. 
+**Công cụ AI tạo sinh Email-marketing (β)** là bản thử nghiệm ứng dụng công nghệ AI tạo sinh (Generative-AI) trong lĩnh 
+vực Email-marketing. 
 
 **Công cụ AI tạo sinh Email-marketing (β)** tiên tiến, một bước đột phá trong lĩnh vực quảng cáo qua email. 
 Được phát triển dựa trên công nghệ AI tạo sinh hàng đầu, công cụ này mang đến ba tính năng ấn tượng:
@@ -109,7 +110,8 @@ Một số ví dụ tương tác với ChatMSpot:
 
 {IMAGE_EXAMPLE_4}
 
-### Mẫu tham khảo (Templates)
+
+### <a name='templates'></a> 2.4 Mẫu tham khảo (Templates)
 
 
 #### Tạo mới một Email-marketing cơ bản

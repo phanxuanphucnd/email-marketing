@@ -27,7 +27,7 @@ def call_openai(messages, max_tokens: int = 512):
 def template_content_rewriter():
     is_rewrite = False
 
-    content = st.text_area("**Nội dung cần viết lại:**", "", 500, 1024)
+    content = st.text_area("**Nội dung cần viết lại\*:**", "", 500, 1024)
     tone_email = st.selectbox(
         "**Phong cách (Tone):**",
         (
@@ -79,28 +79,31 @@ def template_content_rewriter():
 
 
 def rewrite_content(content, tone_email, style_email, language):
-    print('\n\n----------------- Rewriting Content Email Marketing -----------------')
-    messages = []
+    if not content:
+        st.error("Bạn cần phải cung cấp **Nội dung cần viết lại** để chúng tôi có thể hỗ trợ bạn tốt nhất!")
+    else:
+        print('\n\n----------------- Rewriting Content Email Marketing -----------------')
+        messages = []
 
-    # st.write("**Nội dung được viết lại:**")
-    st.write("")
-    st.write("")
-    content_placeholder = st.empty()
+        # st.write("**Nội dung được viết lại:**")
+        st.write("")
+        st.write("")
+        content_placeholder = st.empty()
 
-    messages.extend([
-        {
-            "role": "system",
-            "content": "Bạn là một trợ lý ảo tạo nội dụng AI Marketing."
-        },
-        {
-            "role": "user",
-            "content": REWRITE_CONTENT_PROMPT[style_email].format(
-                tone_email=tone_email, language=language, content=content)
-        }
-    ])
-    content = call_openai(messages=messages, max_tokens=1024)
+        messages.extend([
+            {
+                "role": "system",
+                "content": "Bạn là một trợ lý ảo tạo nội dụng AI Marketing."
+            },
+            {
+                "role": "user",
+                "content": REWRITE_CONTENT_PROMPT[style_email].format(
+                    tone_email=tone_email, language=language, content=content)
+            }
+        ])
+        content = call_openai(messages=messages, max_tokens=1024)
 
-    print(">> Messages: ", messages)
-    print(">> Re-written Content: ", content)
+        print(">> Messages: ", messages)
+        print(">> Re-written Content: ", content)
 
-    content_placeholder.write(content)
+        content_placeholder.write(content)

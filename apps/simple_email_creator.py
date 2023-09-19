@@ -27,7 +27,7 @@ def call_openai(messages, max_tokens: int = 512):
 def template_simple_email():
     is_create = False
 
-    topic = st.text_area("**Chủ đề chiến dịch email (Topic):**", "", 50, 200)
+    topic = st.text_area("**Chủ đề chiến dịch email (Topic)\*:**", "", 50, 200)
 
     st.write("**:black[Những điểm chính mà bạn muốn đề cập (Key points):]**")
     key_point_1 = st.text_input("Key point 1: ", "", 50)
@@ -98,38 +98,41 @@ def template_simple_email():
 
 
 def create_simple_email(topic, key_points, tone_email, language):
-    print('\n\n----------------- Creating Simple Email Marketing -----------------')
-    messages = []
-    title_placeholder = st.empty()
+    if not topic:
+        st.error("Bạn cần phải cung cấp **Chủ đề chiến dịch email (Topic)** để chúng tôi có thể hỗ trợ bạn tốt nhất!")
+    else:
+        print('\n\n----------------- Creating Simple Email Marketing -----------------')
+        messages = []
+        title_placeholder = st.empty()
 
-    content_placeholder = st.empty()
+        content_placeholder = st.empty()
 
-    system_prompt = random.choice(SYSTEM_PROMPT)
+        system_prompt = random.choice(SYSTEM_PROMPT)
 
-    messages.extend([
-        {
-            "role": "system",
-            "content": system_prompt
-        },
-        {
+        messages.extend([
+            {
+                "role": "system",
+                "content": system_prompt
+            },
+            {
+                "role": "user",
+                "content": TITLE_PROMPT.format(topic=topic, tone_email=tone_email, language=language)
+            }
+        ])
+        title = call_openai(messages=messages, max_tokens=512)
+
+        print(">> Messages: ", messages)
+        print(">> Title: ", title)
+
+        messages.append({
             "role": "user",
-            "content": TITLE_PROMPT.format(topic=topic, tone_email=tone_email, language=language)
-        }
-    ])
-    title = call_openai(messages=messages, max_tokens=512)
+            "content": CONTENT_PROMPT.format(
+                n=len(key_points), key_points='\n- '.join(key_points), tone_email=tone_email, language=language)
+        })
+        content = call_openai(messages=messages, max_tokens=1024)
 
-    print(">> Messages: ", messages)
-    print(">> Title: ", title)
+        print("\n>> Messages: ", messages)
+        print(">> Content: ", content)
 
-    messages.append({
-        "role": "user",
-        "content": CONTENT_PROMPT.format(
-            n=len(key_points), key_points='\n- '.join(key_points), tone_email=tone_email, language=language)
-    })
-    content = call_openai(messages=messages, max_tokens=1024)
-
-    print("\n>> Messages: ", messages)
-    print(">> Content: ", content)
-
-    title_placeholder.write(f"**{title}**")
-    content_placeholder.write(content)
+        title_placeholder.write(f"**{title}**")
+        content_placeholder.write(content)

@@ -1,3 +1,4 @@
+import uuid
 from PIL import Image
 from apps.assistant import *
 from apps.documentation import *
