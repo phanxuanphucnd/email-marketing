@@ -9,7 +9,7 @@ from apps.constants import *
 from apps.ui.chat_ui import *
 
 
-openai.api_key = "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"
+openai.api_key = "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#########"
 
 openai_params = {
     'temperature': 1,
